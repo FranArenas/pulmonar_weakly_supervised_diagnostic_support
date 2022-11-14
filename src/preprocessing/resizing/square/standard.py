@@ -1,7 +1,7 @@
 import numpy as np
 from skimage.transform import resize
 
-from preprocessing.resizing.square.resizer import SquareImageResizer
+from src.preprocessing.resizing.square.resizer import SquareImageResizer
 
 
 class StandardResizer(SquareImageResizer):

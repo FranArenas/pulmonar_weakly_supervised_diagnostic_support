@@ -2,7 +2,7 @@ import pathlib
 
 from pydantic import BaseModel, validator
 
-from preprocessing.entity.resize_mode import ResizeMode
+from src.preprocessing.entity.resize_mode import ResizeMode
 
 
 class Arguments(BaseModel):

@@ -3,7 +3,7 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-from preprocessing.resource.reader.reader import ImageReader
+from src.preprocessing.resource.reader.reader import ImageReader
 
 
 class ImageReaderImpl(ImageReader):

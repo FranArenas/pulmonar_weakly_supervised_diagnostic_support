@@ -3,3 +3,4 @@ tqdm~=4.64.1
 numpy==1.23.4
 pydantic==1.10.2
 scikit-image==0.19.3
+uib-vfeatures==0.7

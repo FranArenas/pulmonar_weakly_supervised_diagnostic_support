@@ -3,7 +3,7 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-from preprocessing.resource.writer.writer import ImageWriter
+from src.preprocessing.resource.writer.writer import ImageWriter
 
 
 class ImageWriterImpl(ImageWriter):

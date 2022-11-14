@@ -1,8 +1,8 @@
 import argparse
 from typing import Sequence, Optional
 
-from preprocessing.entity.resize_mode import ResizeMode
-from preprocessing.parser.arguments import Arguments
+from src.preprocessing.entity.resize_mode import ResizeMode
+from src.preprocessing.parser.arguments import Arguments
 
 
 class Parser:

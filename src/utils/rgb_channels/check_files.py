@@ -4,7 +4,7 @@ from pathlib import Path
 import cv2
 import tqdm
 
-from utils.rgb_channels.check_file import check_file
+from src.utils.rgb_channels.check_file import check_file
 
 
 def main(directory: Path):
@@ -18,5 +18,5 @@ def main(directory: Path):
 
 
 if __name__ == "__main__":
-    asd = cv2.imread(str(Path("../../data/input/deleted_covid/CRIS13644609.png").resolve()), cv2.IMREAD_GRAYSCALE)
-    main(Path("../../data/input/nocovid").resolve())
+    asd = cv2.imread(str(Path("../../../data/input/deleted_covid/CRIS13644609.png").resolve()), cv2.IMREAD_GRAYSCALE)
+    main(Path("../../../data/input/nocovid").resolve())

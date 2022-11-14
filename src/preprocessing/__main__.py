@@ -1,11 +1,11 @@
 import tqdm
 
-from preprocessing.entity.resize_mode import ResizeMode
-from preprocessing.parser.parser import Parser
-from preprocessing.resizing.square.standard import StandardResizer
-from preprocessing.resizing.square.zero_padding import ZeroPaddingResizer
-from preprocessing.resource.reader.reader_impl import ImageReaderImpl
-from preprocessing.resource.writer.writer_impl import ImageWriterImpl
+from src.preprocessing.entity.resize_mode import ResizeMode
+from src.preprocessing.parser.parser import Parser
+from src.preprocessing.resizing.square.standard import StandardResizer
+from src.preprocessing.resizing.square.zero_padding import ZeroPaddingResizer
+from src.preprocessing.resource.reader.reader_impl import ImageReaderImpl
+from src.preprocessing.resource.writer.writer_impl import ImageWriterImpl
 
 if __name__ == "__main__":
     arguments = Parser().parse()
