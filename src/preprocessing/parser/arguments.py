@@ -10,6 +10,7 @@ class Arguments(BaseModel):
     input_path: pathlib.Path
     output_path: pathlib.Path
     resize_mode: ResizeMode
+    train_test_split: float
 
     @validator("shape")
     def validate_shape(cls, v: int):
@@ -21,4 +22,10 @@ class Arguments(BaseModel):
     def validate_input_path(cls, v: pathlib.Path):
         if not v.exists():
             raise FileNotFoundError(None, f"Input_path value ({v}) doesn't exists")
+        return v
+
+    @validator("train_test_split")
+    def validate_train_test_split(cls, v: float):
+        if v > 1.0 or v < 0.0:
+            raise ValueError("Train test split value should be between 1 and 0")
         return v
