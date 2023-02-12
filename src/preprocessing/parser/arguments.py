@@ -2,7 +2,8 @@ import pathlib
 
 from pydantic import BaseModel, validator
 
-from src.preprocessing.entity.resize_mode import ResizeMode
+from preprocessing.entity.color_mode import ColorMode
+from preprocessing.entity.resize_mode import ResizeMode
 
 
 class Arguments(BaseModel):
@@ -11,6 +12,7 @@ class Arguments(BaseModel):
     output_path: pathlib.Path
     resize_mode: ResizeMode
     train_test_split: float
+    color_mode: ColorMode
 
     @validator("shape")
     def validate_shape(cls, v: int):

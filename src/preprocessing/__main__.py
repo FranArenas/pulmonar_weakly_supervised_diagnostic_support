@@ -1,48 +1,73 @@
 import random
 from math import ceil
 from pathlib import Path
-from typing import Tuple, Iterable, List
+from typing import Tuple, List
 
+import numpy as np
 import tqdm
 
-from src.preprocessing.entity.resize_mode import ResizeMode
-from src.preprocessing.parser.parser import Parser
-from src.preprocessing.resizing.square.standard import StandardResizer
-from src.preprocessing.resizing.square.zero_padding import ZeroPaddingResizer
-from src.preprocessing.resource.reader.reader_impl import ImageReaderImpl
-from src.preprocessing.resource.writer.writer_impl import ImageWriterImpl
+from preprocessing.entity.resize_mode import ResizeMode
+from preprocessing.parser.arguments import Arguments
+from preprocessing.parser.parser import Parser
+from preprocessing.resizing.square.standard import StandardResizer
+from preprocessing.resizing.square.zero_padding import ZeroPaddingResizer
+from preprocessing.resource.reader.reader import ImageReader
+from preprocessing.resource.reader.reader_impl import ImageReaderImpl
+from preprocessing.resource.writer.writer import ImageWriter
+from preprocessing.resource.writer.writer_impl import ImageWriterImpl
 
 
-def _train_test_split(files: List[Path], percentage: float) -> Tuple[Iterable, Iterable]:
-    train_split = random.choices(files, k=ceil(len(files) / percentage))
-    test_split = [x for x in files if x not in train_split]
-    return train_split, test_split
+class Main:
+    def __init__(self, arguments: Arguments, reader: ImageReader, writer: ImageWriter):
+        self.arguments = arguments
+        self.reader = reader
+        self.writer = writer
+
+        match self.arguments.resize_mode:
+            case ResizeMode.STANDARD:
+                self.resizer = StandardResizer()
+            case ResizeMode.ZERO_PADDING:
+                self.resizer = ZeroPaddingResizer()
+            case _ as mode:
+                raise ValueError(f"Mode {mode} not recognized")
+
+    def run(self):
+        if self.arguments.input_path.is_dir():
+
+            train, test = self._train_test_split([*self.arguments.input_path.rglob("*.png")],
+                                                 self.arguments.train_test_split)
+            for file in tqdm.tqdm(train, desc="Train images"):
+                image = self._read(file)
+                if test:
+                    self.writer.write(image,
+                                      self.arguments.output_path.parent / "train" / self.arguments.output_path.name / file.name)
+                else:
+                    self.writer.write(image, self.arguments.output_path / file.name)
+
+            for file in tqdm.tqdm(test, desc="Test images"):
+                image = self._read(file)
+                self.writer.write(image,
+                                  self.arguments.output_path.parent / "test" / self.arguments.output_path.name / file.name)
+        else:
+            image = self._read(self.arguments.input_path)
+            self.writer.write(image, self.arguments.output_path)
+
+    def _read(self, path: str | Path) -> np.ndarray:
+        return self.resizer.resize(self.reader.read(path, mode=self.arguments.color_mode),
+                                   shape=self.arguments.shape)
+
+    @staticmethod
+    def _train_test_split(files: List[Path], percentage: float) -> Tuple[list, list]:
+        if percentage == 0:
+            return files, []
+        train_split = random.sample(files, k=ceil(len(files) / (1 / percentage)))
+        test_split = list(set(files) - set(train_split))
+        return train_split, test_split
 
 
 if __name__ == "__main__":
-    arguments = Parser().parse()
-    reader = ImageReaderImpl()
-    writer = ImageWriterImpl()
+    arguments_impl = Parser().parse()
+    reader_impl = ImageReaderImpl()
+    writer_impl = ImageWriterImpl()
 
-    match arguments.resize_mode:
-        case ResizeMode.STANDARD:
-            resizer = StandardResizer()
-        case ResizeMode.ZERO_PADDING:
-            resizer = ZeroPaddingResizer()
-        case _ as mode:
-            raise ValueError(f"Mode {mode} not recognized")
-
-    if arguments.input_path.is_dir():
-
-        train, test = _train_test_split(list(arguments.input_path.iterdir()),
-                                        arguments.train_test_split)
-        for file in tqdm.tqdm(train, desc="Train images"):
-            image = resizer.resize(reader.read(file), shape=arguments.shape)
-            writer.write(image, arguments.output_path / "train" / file.name)
-
-        for file in tqdm.tqdm(test, desc="Test images"):
-            image = resizer.resize(reader.read(file), shape=arguments.shape)
-            writer.write(image, arguments.output_path / "test" / file.name)
-    else:
-        image = resizer.resize(reader.read(arguments.input_path), shape=arguments.shape)
-        writer.write(image, arguments.output_path)
+    Main(arguments_impl, reader_impl, writer_impl).run()
