@@ -1,7 +1,7 @@
 import numpy as np
 from uib_vfeatures.masks import Masks
 
-from src.features.vfeatures.calculator.mask.mask import MaskVFeaturesCalculator
+from features.vfeatures.calculator.mask.mask import MaskVFeaturesCalculator
 
 
 class MaskFeatureCalculatorImp(MaskVFeaturesCalculator):

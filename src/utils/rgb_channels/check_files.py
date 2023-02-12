@@ -4,7 +4,7 @@ from pathlib import Path
 import cv2
 import tqdm
 
-from src.utils.rgb_channels.check_file import check_file
+from utils.rgb_channels.check_file import check_file
 
 
 def main(directory: Path):

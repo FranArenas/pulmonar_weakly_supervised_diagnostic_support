@@ -1,7 +1,7 @@
 import numpy as np
 from uib_vfeatures.texture import Texture
 
-from src.features.vfeatures.calculator.texture.texture import TextureVFeaturesCalculator
+from features.vfeatures.calculator.texture.texture import TextureVFeaturesCalculator
 
 
 class TextureFeatureCalculatorImp(TextureVFeaturesCalculator):

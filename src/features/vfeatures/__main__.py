@@ -1,10 +1,10 @@
 import argparse
 import sys
 
-from src.features.uiblungs.cropper.cropper_imp import BoxCropperImp
-from src.features.uiblungs.separator.separator_imp import LungSeparatorImp
-from src.features.uiblungs.slicer.slicer_imp import BoxSlicerImp
-from src.features.uiblungs.splitter import Splitter
+from features.uiblungs.cropper.cropper_imp import BoxCropperImp
+from features.uiblungs.separator.separator_imp import LungSeparatorImp
+from features.uiblungs.slicer.slicer_imp import BoxSlicerImp
+from features.uiblungs.splitter import Splitter
 
 
 class Main:

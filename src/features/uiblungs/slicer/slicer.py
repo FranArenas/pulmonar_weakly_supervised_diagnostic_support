@@ -1,6 +1,6 @@
 import abc
 
-from src.features.uiblungs.box.box import ImageBox
+from features.uiblungs.box.box import ImageBox
 
 
 class BoxSlicer(abc.ABC):

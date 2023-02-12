@@ -1,9 +1,9 @@
 import numpy as np
 
-from src.features.uiblungs.splitter import Splitter
-from src.features.vfeatures.calculator.color.color import ColorVFeaturesCalculator
-from src.features.vfeatures.calculator.mask.mask import MaskVFeaturesCalculator
-from src.features.vfeatures.calculator.texture.texture import TextureVFeaturesCalculator
+from features.uiblungs.splitter import Splitter
+from features.vfeatures.calculator.color.color import ColorVFeaturesCalculator
+from features.vfeatures.calculator.mask.mask import MaskVFeaturesCalculator
+from features.vfeatures.calculator.texture.texture import TextureVFeaturesCalculator
 
 
 class VFeaturesCalculator:

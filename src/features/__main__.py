@@ -6,17 +6,17 @@ import sys
 import cv2
 import numpy as np
 
-from src.features.uiblungs.cropper.cropper_imp import BoxCropperImp
-from src.features.uiblungs.separator.separator_imp import LungSeparatorImp
-from src.features.uiblungs.slicer.slicer_imp import BoxSlicerImp
-from src.features.uiblungs.splitter import Splitter
-from src.features.vfeatures.calculator.color.color_imp import \
+from features.uiblungs.cropper.cropper_imp import BoxCropperImp
+from features.uiblungs.separator.separator_imp import LungSeparatorImp
+from features.uiblungs.slicer.slicer_imp import BoxSlicerImp
+from features.uiblungs.splitter import Splitter
+from features.vfeatures.calculator.color.color_imp import \
     ColorFeatureCalculatorImp
-from src.features.vfeatures.calculator.mask.mask_imp import \
+from features.vfeatures.calculator.mask.mask_imp import \
     MaskFeatureCalculatorImp
-from src.features.vfeatures.calculator.texture.texture_imp import \
+from features.vfeatures.calculator.texture.texture_imp import \
     TextureFeatureCalculatorImp
-from src.features.vfeatures.vfeatures_calculator import VFeaturesCalculator
+from features.vfeatures.vfeatures_calculator import VFeaturesCalculator
 
 
 class Main:

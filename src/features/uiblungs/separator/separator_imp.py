@@ -3,8 +3,8 @@ from copy import deepcopy
 import cv2
 import numpy as np
 
-from src.features.uiblungs.box.box import ImageBox
-from src.features.uiblungs.separator.separator import LungSeparator
+from features.uiblungs.box.box import ImageBox
+from features.uiblungs.separator.separator import LungSeparator
 
 
 class LungSeparatorImp(LungSeparator):

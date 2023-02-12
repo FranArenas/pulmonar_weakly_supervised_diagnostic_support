@@ -4,13 +4,13 @@ import pathlib
 import cv2
 import numpy as np
 
-from src.features.uiblungs.box.box import ImageBox
-from src.features.uiblungs.cropper.cropper import BoxCropper
-from src.features.uiblungs.cropper.cropper_imp import BoxCropperImp
-from src.features.uiblungs.separator.separator import LungSeparator
-from src.features.uiblungs.separator.separator_imp import LungSeparatorImp
-from src.features.uiblungs.slicer.slicer import BoxSlicer
-from src.features.uiblungs.slicer.slicer_imp import BoxSlicerImp
+from features.uiblungs.box.box import ImageBox
+from features.uiblungs.cropper.cropper import BoxCropper
+from features.uiblungs.cropper.cropper_imp import BoxCropperImp
+from features.uiblungs.separator.separator import LungSeparator
+from features.uiblungs.separator.separator_imp import LungSeparatorImp
+from features.uiblungs.slicer.slicer import BoxSlicer
+from features.uiblungs.slicer.slicer_imp import BoxSlicerImp
 
 
 class Splitter:

@@ -1,7 +1,7 @@
 import numpy as np
 from uib_vfeatures.color import Color
 
-from src.features.vfeatures.calculator.color.color import ColorVFeaturesCalculator
+from features.vfeatures.calculator.color.color import ColorVFeaturesCalculator
 
 
 class ColorFeatureCalculatorImp(ColorVFeaturesCalculator):

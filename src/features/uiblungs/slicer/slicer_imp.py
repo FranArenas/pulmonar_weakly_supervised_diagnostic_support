@@ -1,5 +1,5 @@
-from src.features.uiblungs.box.box import ImageBox
-from src.features.uiblungs.slicer.slicer import BoxSlicer
+from features.uiblungs.box.box import ImageBox
+from features.uiblungs.slicer.slicer import BoxSlicer
 
 
 class BoxSlicerImp(BoxSlicer):

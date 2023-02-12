@@ -2,7 +2,7 @@ import abc
 
 import numpy as np
 
-from src.features.uiblungs.box.box import ImageBox
+from features.uiblungs.box.box import ImageBox
 
 
 class LungSeparator(abc.ABC):
