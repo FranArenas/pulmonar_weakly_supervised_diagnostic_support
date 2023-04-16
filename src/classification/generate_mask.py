@@ -2,17 +2,20 @@ from pathlib import Path
 
 import PIL.Image
 import cv2
+import torch
 from tqdm import tqdm
 
-from classification.mask_generator import GradCamMaskGenerator
+from classification.mask_generator import MaskGenerator
 from classification.predict import predict
 from classification.resnet50 import Resnet50
+from classification.sidu.mask_generator import SiduMaskGenerator
 
 
 def generate_masks(images_path: Path,
                    masks_path: Path,
-                   model: Resnet50):
-    mask_generator = GradCamMaskGenerator(model.model)
+                   model: Resnet50,
+                   mask_generator: MaskGenerator,
+                   device: str = "cuda" if torch.cuda.is_available() else "cpu"):
     labels_paths = [*images_path.glob("*")]
 
     for label_path in labels_paths:
@@ -21,7 +24,7 @@ def generate_masks(images_path: Path,
 
         for image_path in tqdm([*label_path.glob("*")], desc=f"Generating {label_path.name} masks"):
 
-            prediction = predict(image_path, model)
+            prediction = predict(image_path, model, device=device)
 
             mask_path = \
                 Path(f"{output_path}/"
@@ -40,12 +43,14 @@ def generate_masks(images_path: Path,
 
 if __name__ == "__main__":
     weights = Path(
-        "../../data/weights/desc=test_acc=0.8310810923576355_test_loss=0.48300980299711227_Resnet50 2048-1024-512_Resnet50learning_rate=7.5e-05_weight_decay=0.001_start_param_training=30_nepochs=35_eafa44ca-c07e-4304-a90f-bee1e521.pt")
+        "../../data/weights/desc=test_acc=0.7905405759811401_test_loss=0.5681480640998563_Reduced 2048-1024-512_Resnet50learning_rate=0.0001_weight_decay=5e-05_layer_act=0_nepochs=42_7e7c1b32-210f-4c70-a368-e3c77eaf.pt")
     model = Resnet50("cpu")
     model.load_weights(weights)
 
-    images_path = Path("../../data/output/zero_padding/train")
-    output_path = Path("../../data/output/zero_padding/masks/train")
+    images_path = Path("../../data/output/zero_padding_reduced/train")
+    output_path = Path("../../data/output/zero_padding_reduced/masks/sidu/train")
     output_path.mkdir(parents=True, exist_ok=True)
 
-    generate_masks(images_path, output_path, model)
+    # mask_generator = GradCamMaskGenerator(model.model)
+    mask_generator = SiduMaskGenerator(model.model)
+    generate_masks(images_path, output_path, model, mask_generator)

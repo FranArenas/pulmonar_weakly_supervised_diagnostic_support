@@ -9,3 +9,4 @@ torchvision==0.14.1
 pillow==9.3.0
 matplotlib==3.6.2
 captum==0.6.0
+mmn_xai==0.9

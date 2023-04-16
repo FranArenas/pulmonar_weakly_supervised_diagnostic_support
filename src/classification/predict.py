@@ -9,10 +9,14 @@ from classification.transformation import basic_transformation
 
 
 def predict(image_path: Path,
-            model: Resnet50) -> Dict[str, float]:
+            model: Resnet50,
+            device: str = "cuda" if torch.cuda.is_available() else "cpu") -> Dict[str, float]:
     image = torch.unsqueeze(basic_transformation(PIL.Image.open(image_path)), dim=0)
 
-    result = model.predict(image).data.numpy()[0]
+    if device == "cuda":
+        image = image.cuda()
+
+    result = model.predict(image).data.cpu().numpy()[0]
     predict_dict = {"covid": result[0], "nocovid": result[1]}
     return predict_dict
 
