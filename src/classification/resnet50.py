@@ -101,5 +101,6 @@ class Resnet50:
         self.model.load_state_dict(torch.load(path, map_location=self.device))
 
     def predict(self, image: torch.Tensor) -> Tensor:
+        self.model.eval()
         with torch.no_grad():
             return softmax(self.model(image), dim=1)
