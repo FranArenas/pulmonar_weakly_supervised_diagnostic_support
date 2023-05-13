@@ -3,9 +3,9 @@ import cv2
 import numpy as np
 import torch
 
-from classification.mask_generator import MaskGenerator
-from classification.sidu.sidu_memory import sidu_wrapper
-from classification.transformation import basic_transformation
+from predictions.mask.mask_generator import MaskGenerator
+from predictions.mask.sidu.sidu_memory import sidu_wrapper
+from predictions.models.transformation import basic_transformation
 
 
 class SiduMaskGenerator(MaskGenerator):

@@ -4,8 +4,8 @@ import numpy as np
 import torch
 from captum.attr import LayerGradCam, LayerAttribution
 
-from classification.mask_generator import MaskGenerator
-from classification.transformation import basic_transformation
+from predictions.mask.mask_generator import MaskGenerator
+from predictions.models.transformation import basic_transformation
 
 
 class GradCamMaskGenerator(MaskGenerator):
@@ -18,7 +18,7 @@ class GradCamMaskGenerator(MaskGenerator):
         tensor = tensor.cuda() if self.device == "cuda" else tensor.cpu()
         grad_cam = LayerGradCam(self.model, self.model.layer4[2].conv3)
         attr = grad_cam.attribute(tensor, 1, relu_attributions=True)
-        upsampled_attr = LayerAttribution.interpolate(attr, (800, 800))
+        upsampled_attr = LayerAttribution.interpolate(attr, (image.size[0], image.size[1]))
         output_heatmap = upsampled_attr.detach().numpy()[0]
         transposed_heatmap = np.transpose(output_heatmap, (1, 2, 0))
         normalized_heatmap = np.zeros((image.size[0], image.size[1]))

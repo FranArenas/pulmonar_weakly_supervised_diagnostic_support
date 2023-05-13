@@ -45,7 +45,7 @@ class Main:
 
         parser.add_argument('image_path', help="Path of lungs image")
         parser.add_argument('mask_path', help="Path of the mask image")
-        parser.add_argument('output_path', help="Path of the output folder")
+        parser.add_argument('output_path', help="Path of the preprocessed folder")
 
         parser.add_argument('--output_mode', help="""
         Supported modes:
@@ -78,7 +78,7 @@ class Main:
 
         parser.add_argument('image_path', help="Path of lungs image")
         parser.add_argument('mask_path', help="Path of the mask image")
-        parser.add_argument('output_path', help="Path of the output folder")
+        parser.add_argument('output_path', help="Path of the preprocessed folder")
         parser.add_argument('--n_slices', help="Number of slices for each"
                                                " lung", default=4)
 
@@ -115,7 +115,7 @@ class Main:
 
         parser.add_argument('image_path', help="Path of lungs image")
         parser.add_argument('mask_path', help="Path of the mask image")
-        parser.add_argument('output_path', help="Path of the output folder")
+        parser.add_argument('output_path', help="Path of the preprocessed folder")
         parser.add_argument('--n_colors', help="Number of colors of an image")
         parser.add_argument('--distances', help="Distances to calculate features",
                             nargs='*')

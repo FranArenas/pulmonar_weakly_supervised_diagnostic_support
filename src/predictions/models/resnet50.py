@@ -9,8 +9,10 @@ from torch.utils.data import DataLoader
 from torchvision.models import ResNet50_Weights, resnet50
 from tqdm import tqdm
 
+from predictions.models.model import Model
 
-class Resnet50:
+
+class Resnet50(Model):
 
     def __init__(self,
                  device,

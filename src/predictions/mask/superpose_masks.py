@@ -4,9 +4,9 @@ import cv2
 from tqdm import tqdm
 
 if __name__ == "__main__":
-    masks_path = Path("../../data/output/zero_padding/masks/gradcam/test")
-    images_path = Path("../../data/output/zero_padding/test")
-    outputs_path = Path("../../data/output/zero_padding/superposed_masks/test")
+    masks_path = Path("../../../data/hands-lungs/gradcam-corrected")
+    images_path = Path("../../../data/hands-lungs/input")
+    outputs_path = Path("../../../data/hands-lungs/superposed-gradcam-masks")
 
     images_paths = [*images_path.rglob("*.png")]
 
