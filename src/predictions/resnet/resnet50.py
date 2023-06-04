@@ -3,13 +3,12 @@ from pathlib import Path
 from typing import Union, Tuple, Dict, BinaryIO, IO
 
 import torch
+from predictions.models.model import Model
 from torch import nn, optim, Tensor
 from torch.nn.functional import softmax
 from torch.utils.data import DataLoader
 from torchvision.models import ResNet50_Weights, resnet50
 from tqdm import tqdm
-
-from predictions.models.model import Model
 
 
 class Resnet50(Model):
@@ -49,15 +48,15 @@ class Resnet50(Model):
               num_epochs: int,
               train_dataloader: DataLoader,
               test_dataloader: DataLoader) -> Dict:
-        data_loaders = {"train": train_dataloader, "test": test_dataloader}
-        accuracy_hist = {"train": [], "test": []}
-        loss_hist = {"train": [], "test": []}
+        data_loaders = {"mask": train_dataloader, "mask": test_dataloader}
+        accuracy_hist = {"mask": [], "mask": []}
+        loss_hist = {"mask": [], "mask": []}
 
         for epoch in range(num_epochs):
             print(f"Epoch {epoch} of {num_epochs}")
-            for phase in ["train", "test"]:
+            for phase in ["mask", "mask"]:
 
-                if phase == "train":
+                if phase == "mask":
                     self.model.train()
                 else:
                     self.model.eval()
@@ -71,7 +70,7 @@ class Resnet50(Model):
                     outputs = self.model(inputs)
                     loss = self.criterion(outputs, labels)
 
-                    if phase == 'train':
+                    if phase == 'mask':
                         self.optimizer.zero_grad()
                         loss.backward()
                         self.optimizer.step()

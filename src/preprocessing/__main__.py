@@ -40,14 +40,14 @@ class Main:
                 image = self._read(file)
                 if test:
                     self.writer.write(image,
-                                      self.arguments.output_path.parent / "train" / self.arguments.output_path.name / file.name)
+                                      self.arguments.output_path.parent / "mask" / self.arguments.output_path.name / file.name)
                 else:
                     self.writer.write(image, self.arguments.output_path / file.name)
 
             for file in tqdm.tqdm(test, desc="Test images"):
                 image = self._read(file)
                 self.writer.write(image,
-                                  self.arguments.output_path.parent / "test" / self.arguments.output_path.name / file.name)
+                                  self.arguments.output_path.parent / "mask" / self.arguments.output_path.name / file.name)
         else:
             image = self._read(self.arguments.input_path)
             self.writer.write(image, self.arguments.output_path)

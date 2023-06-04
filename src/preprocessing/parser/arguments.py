@@ -29,5 +29,5 @@ class Arguments(BaseModel):
     @validator("train_test_split")
     def validate_train_test_split(cls, v: float):
         if v > 1.0 or v < 0.0:
-            raise ValueError("Train test split value should be between 1 and 0")
+            raise ValueError("Train mask split value should be between 1 and 0")
         return v

@@ -4,12 +4,11 @@ from typing import List
 import PIL.Image
 import cv2
 import torch
-from predictions.resnet50 import Resnet50
-from tqdm import tqdm
-
 from predictions.mask.gradcam.mask_generator import GradCamMaskGenerator
 from predictions.mask.mask_generator import MaskGenerator
 from predictions.predict import predict
+from predictions.resnet50 import Resnet50
+from tqdm import tqdm
 
 
 def generate_masks(images_path: Path,
@@ -49,8 +48,8 @@ if __name__ == "__main__":
     model = Resnet50("cpu")
     model.load_weights(weights)
 
-    images_path = Path("../../../data/preprocessed/zero_padding_reduced/train")
-    output_path = Path("../../../data/preprocessed/zero_padding_reduced/masks/sidu/train")
+    images_path = Path("../../../data/preprocessed/zero_padding_reduced/mask")
+    output_path = Path("../../../data/preprocessed/zero_padding_reduced/masks/sidu/mask")
     output_path.mkdir(parents=True, exist_ok=True)
 
     # mask_generator = GradCamMaskGenerator(model.model)

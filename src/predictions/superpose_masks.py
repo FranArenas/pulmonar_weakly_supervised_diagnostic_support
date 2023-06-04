@@ -4,16 +4,20 @@ import cv2
 from tqdm import tqdm
 
 if __name__ == "__main__":
-    masks_path = Path("../../../data/hands-lungs/gradcam-corrected")
-    images_path = Path("../../../data/hands-lungs/input")
-    outputs_path = Path("../../../data/hands-lungs/superposed-gradcam-masks")
+    masks_path = Path("../../data/unet/output")
+    images_path = Path("../../data/unet/test/lung")
+    outputs_path = Path("../../data/unet/superposed-output")
+
+    masks_path = Path("../../data/unet/output")
+    images_path = Path("../../data/unet/test/lung")
+    outputs_path = Path("../../data/unet/superposed-output")
 
     images_paths = [*images_path.rglob("*.png")]
 
     for mask_path in tqdm([*masks_path.rglob("*.png")]):
         image_name = mask_path.name.split("-")[-1]
         image_path = [*filter(lambda x: image_name in str(x), images_paths)]
-        assert len(image_path) == 1
+        assert len(image_path) == 1, f"expected: 1 | actual: {len(image_path)}"
         images_paths.remove(image_path[0])
         image_path = image_path[0].resolve()
 

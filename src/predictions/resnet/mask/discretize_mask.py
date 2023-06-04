@@ -4,13 +4,13 @@ import cv2
 import numpy as np
 
 if __name__ == "__main__":
-    input_dir_path = Path("../../../data/hands-lungs/gradcam").resolve()
-    output_dir_path = Path("../../../data/hands-lungs/gradcam-corrected").resolve()
+    input_dir_path = Path("../../../../data/hands-lungs/gradcam/train").resolve()
+    output_dir_path = Path("../../../../data/hands-lungs/gradcam-corrected-95/train").resolve()
 
     for image_path in input_dir_path.rglob("*png"):
         image = cv2.imread(str(image_path.resolve()), cv2.IMREAD_UNCHANGED)
         discrete_image = np.zeros_like(image)
-        discrete_image[image > 100] = 255
+        discrete_image[image > 95] = 255
         mask_new_path = Path(f"output_path/{image_path.parent.parent}/{image_path.name}")
         mask_new_path.parent.mkdir(parents=True, exist_ok=True)
 

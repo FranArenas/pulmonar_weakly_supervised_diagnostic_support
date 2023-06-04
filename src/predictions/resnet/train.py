@@ -1,20 +1,18 @@
 import pathlib
 
 import torch
+from predictions.models.transformation import train_transformation, basic_transformation
 from predictions.resnet50 import Resnet50
 from torch import device
-from torch.utils.data import DataLoader
 from torchvision import datasets
-
-from predictions.models.transformation import train_transformation, basic_transformation
 
 
 def train():
     input_path = pathlib.Path("../../data/preprocessed/zero_padding").resolve()
     weights_path = pathlib.Path("../../data/weights/zero_padding/weights.h5").resolve()
 
-    train_dataset = datasets.ImageFolder(str(input_path / 'train'), train_transformation)
-    test_dataset = datasets.ImageFolder(str(input_path / 'test'), basic_transformation)
+    train_dataset = datasets.ImageFolder(str(input_path / 'mask'), train_transformation)
+    test_dataset = datasets.ImageFolder(str(input_path / 'mask'), basic_transformation)
 
     train_dataloader = torch.utils.data.DataLoader(train_dataset,
                                                    batch_size=3,
